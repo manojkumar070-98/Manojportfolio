@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manojkumar Yeleti — Financial Reporting Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ===== GLOBAL ===== */
+:root {
+  --navy:#0b0f1a;--navy-light:#141928;--gold:#c9a84c;--gold-light:#e8c97a;
+  --gold-dim:rgba(201,168,76,0.12);--cream:#f5f0e8;--muted:#8a90a0;
+  --border:rgba(201,168,76,0.2);--red:#e05555;--green:#4caf7d;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ===== PORTFOLIO VIEW ===== */
+#portfolio-view { display: block; }
+#admin-login-view { display: none; }
+#admin-dashboard-view { display: none; }
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;padding:24px 60px;display:flex;justify-content:space-between;align-items:center;z-index:100;border-bottom:1px solid transparent;transition:all 0.4s ease;}
+nav.scrolled{background:rgba(11,15,26,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:16px 60px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;letter-spacing:0.1em;color:var(--cream);text-decoration:none;cursor:pointer;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.3s;position:relative;cursor:pointer;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s ease;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-admin-btn{padding:8px 18px;border:1px solid var(--border);color:var(--gold);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif;transition:all 0.3s;}
+.nav-admin-btn:hover{background:var(--gold-dim);border-color:var(--gold);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px;position:relative;z-index:2;}
+.hero-tag{font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:8px;opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+.hero-name .accent{color:var(--gold);font-style:italic;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.4rem);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:36px;opacity:0;animation:fadeUp 0.8s 0.55s forwards;}
+.hero-desc{font-size:0.95rem;line-height:1.85;color:rgba(245,240,232,0.65);max-width:480px;margin-bottom:48px;opacity:0;animation:fadeUp 0.8s 0.7s forwards;}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.85s forwards;}
+.btn-primary{padding:14px 36px;background:var(--gold);color:var(--navy);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:all 0.3s;font-family:'DM Sans',sans-serif;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{padding:14px 36px;background:transparent;color:var(--cream);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:400;border:1px solid var(--border);cursor:pointer;text-decoration:none;transition:all 0.3s;font-family:'DM Sans',sans-serif;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(201,168,76,0.12) 0%,transparent 65%);}
+.hero-grid-art{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.3;animation:gridMove 20s linear infinite;}
+@keyframes gridMove{0%{transform:translate(0,0);}100%{transform:translate(60px,60px);}}
+.hero-stats{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:2px;width:360px;opacity:0;animation:fadeIn 1s 1s forwards;}
+.stat-card{background:rgba(20,25,40,0.8);border:1px solid var(--border);padding:32px 28px;transition:all 0.3s;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--gold);transition:width 0.4s;}
+.stat-card:hover::before{width:100%;}
+.stat-card:hover{background:rgba(201,168,76,0.06);}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:8px;}
+.stat-label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+
+/* SECTIONS */
+section{padding:100px 60px;}
+.section-label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:300;line-height:1.15;margin-bottom:60px;}
+.section-title em{font-style:italic;color:var(--gold);}
+
+/* ABOUT */
+#about{background:var(--navy-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start;}
+.about-text p{font-size:1rem;line-height:1.9;color:rgba(245,240,232,0.7);margin-bottom:20px;}
+.about-highlights{display:flex;flex-direction:column;gap:16px;margin-top:36px;}
+.highlight-item{display:flex;align-items:flex-start;gap:16px;padding:20px;border:1px solid var(--border);transition:all 0.3s;}
+.highlight-item:hover{border-color:var(--gold);background:var(--gold-dim);}
+.highlight-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;margin-top:7px;flex-shrink:0;}
+.highlight-item p{font-size:0.88rem;line-height:1.7;color:rgba(245,240,232,0.65);}
+.highlight-item strong{color:var(--cream);font-weight:500;}
+.about-info{display:flex;flex-direction:column;}
+.info-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);align-items:baseline;}
+.info-row:first-child{border-top:1px solid var(--border);}
+.info-key{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);width:110px;flex-shrink:0;}
+.info-val{font-size:0.9rem;color:rgba(245,240,232,0.8);}
+.info-val a{color:var(--gold-light);text-decoration:none;}
+.cert-grid{display:flex;flex-direction:column;gap:8px;margin-top:32px;}
+.cert-item{padding:12px 16px;background:var(--gold-dim);border-left:2px solid var(--gold);font-size:0.82rem;color:rgba(245,240,232,0.75);line-height:1.5;}
+
+/* EXPERIENCE */
+#experience{background:var(--navy);}
+.timeline{position:relative;padding-left:40px;}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(180deg,var(--gold),transparent);}
+.timeline-item{margin-bottom:64px;position:relative;}
+.timeline-dot{position:absolute;left:-46px;top:6px;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px rgba(201,168,76,0.15);}
+.timeline-period{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.timeline-role{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;margin-bottom:4px;}
+.timeline-company{font-size:0.88rem;color:var(--muted);margin-bottom:24px;}
+.timeline-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.timeline-list li{font-size:0.88rem;line-height:1.75;color:rgba(245,240,232,0.65);padding-left:20px;position:relative;}
+.timeline-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+.achievements-box{margin-top:24px;padding:20px 24px;background:var(--gold-dim);border:1px solid var(--border);}
+.achievements-box h4{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.achievements-box ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.achievements-box li{font-size:0.85rem;line-height:1.65;color:rgba(245,240,232,0.7);padding-left:16px;position:relative;}
+.achievements-box li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:0.6rem;top:3px;}
+
+/* SKILLS */
+#skills{background:var(--navy-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.skill-group{background:rgba(11,15,26,0.7);border:1px solid var(--border);padding:36px 32px;transition:all 0.3s;}
+.skill-group:hover{border-color:var(--gold);}
+.skill-group-icon{font-size:1.4rem;margin-bottom:16px;}
+.skill-group-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--cream);margin-bottom:20px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.skill-tag{padding:6px 14px;border:1px solid var(--border);font-size:0.72rem;color:rgba(245,240,232,0.6);transition:all 0.25s;}
+.skill-tag:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+
+/* AWARDS */
+#awards{background:var(--navy);}
+.awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.award-card{border:1px solid var(--border);padding:40px 32px;position:relative;overflow:hidden;transition:all 0.3s;}
+.award-card:hover{background:var(--gold-dim);border-color:var(--gold);}
+.award-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(201,168,76,0.12);position:absolute;top:16px;right:24px;line-height:1;}
+.award-icon{font-size:1.6rem;margin-bottom:20px;}
+.award-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:8px;}
+.award-desc{font-size:0.83rem;color:var(--muted);line-height:1.6;}
+
+/* EDUCATION */
+#education{background:var(--navy-light);border-top:1px solid var(--border);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.edu-card{border:1px solid var(--border);padding:40px 36px;position:relative;overflow:hidden;transition:all 0.3s;}
+.edu-card:hover{border-color:var(--gold);}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:linear-gradient(180deg,var(--gold),transparent);transition:height 0.4s;}
+.edu-card:hover::before{height:100%;}
+.edu-year{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--gold);margin-bottom:16px;}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:8px;line-height:1.3;}
+.edu-field{font-size:0.85rem;color:var(--gold-light);margin-bottom:8px;}
+.edu-inst{font-size:0.82rem;color:var(--muted);}
+
+/* CONTACT */
+#contact{background:var(--navy);border-top:1px solid var(--border);text-align:center;}
+.contact-intro{font-size:1rem;color:var(--muted);max-width:500px;margin:0 auto 48px;line-height:1.8;}
+.contact-cards{display:flex;justify-content:center;gap:2px;flex-wrap:wrap;margin-bottom:60px;}
+.contact-card{border:1px solid var(--border);padding:28px 40px;text-decoration:none;color:var(--cream);transition:all 0.3s;min-width:200px;}
+.contact-card:hover{border-color:var(--gold);background:var(--gold-dim);}
+.contact-card-icon{font-size:1.4rem;margin-bottom:12px;}
+.contact-card-label{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.contact-card-val{font-size:0.9rem;color:rgba(245,240,232,0.8);}
+
+footer{padding:32px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+footer p{font-size:0.78rem;color:var(--muted);}
+footer span{color:var(--gold);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ===== ADMIN LOGIN ===== */
+#admin-login-view {
+  min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;
+}
+.login-box {
+  width:420px;border:1px solid var(--border);padding:56px 48px;background:var(--navy-light);
+  animation:fadeIn 0.5s ease;
+}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;text-align:center;margin-bottom:8px;}
+.login-logo span{color:var(--gold);}
+.login-sub{text-align:center;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;}
+.login-label{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block;}
+.login-input{width:100%;background:rgba(11,15,26,0.8);border:1px solid var(--border);color:var(--cream);padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:0.9rem;margin-bottom:24px;outline:none;transition:border 0.3s;}
+.login-input:focus{border-color:var(--gold);}
+.login-btn{width:100%;padding:16px;background:var(--gold);color:var(--navy);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.3s;margin-top:8px;}
+.login-btn:hover{background:var(--gold-light);}
+.login-error{color:var(--red);font-size:0.82rem;text-align:center;margin-top:16px;display:none;}
+.back-to-portfolio{display:block;text-align:center;margin-top:24px;font-size:0.78rem;color:var(--muted);text-decoration:none;cursor:pointer;transition:color 0.3s;}
+.back-to-portfolio:hover{color:var(--gold);}
+
+/* ===== ADMIN DASHBOARD ===== */
+#admin-dashboard-view {
+  display:flex;min-height:100vh;background:var(--navy);
+}
+.admin-sidebar{
+  width:260px;flex-shrink:0;background:var(--navy-light);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;
+}
+.admin-sidebar-header{padding:28px 24px;border-bottom:1px solid var(--border);}
+.admin-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;}
+.admin-logo span{color:var(--gold);}
+.admin-badge{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.admin-nav{padding:16px 0;flex:1;}
+.admin-nav-item{display:flex;align-items:center;gap:12px;padding:13px 24px;color:var(--muted);cursor:pointer;font-size:0.82rem;letter-spacing:0.05em;transition:all 0.2s;border-left:2px solid transparent;}
+.admin-nav-item:hover{color:var(--cream);background:rgba(201,168,76,0.06);}
+.admin-nav-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold-dim);}
+.admin-nav-item .nav-icon{font-size:1rem;width:20px;text-align:center;}
+.admin-sidebar-footer{padding:20px 24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px;}
+.sidebar-btn{width:100%;padding:11px;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;transition:all 0.3s;}
+.sidebar-btn.preview{color:var(--gold);border-color:var(--border);}
+.sidebar-btn.preview:hover{background:var(--gold-dim);border-color:var(--gold);}
+.sidebar-btn.logout{color:var(--muted);}
+.sidebar-btn.logout:hover{color:var(--red);border-color:var(--red);}
+
+.admin-content{margin-left:260px;flex:1;padding:40px 48px;min-height:100vh;}
+.admin-panel{display:none;}
+.admin-panel.active{display:block;}
+
+.admin-panel-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:6px;}
+.admin-panel-title em{color:var(--gold);font-style:italic;}
+.admin-panel-sub{font-size:0.82rem;color:var(--muted);margin-bottom:36px;}
+
+.panel-save-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;padding:16px 20px;background:var(--navy-light);border:1px solid var(--border);}
+.save-status{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.save-status .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);}
+.save-status.saved .dot{background:var(--green);}
+.save-status.saved span{color:var(--green);}
+.save-btn{padding:11px 32px;background:var(--gold);color:var(--navy);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.3s;}
+.save-btn:hover{background:var(--gold-light);}
+
+/* Form Elements */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.form-group{margin-bottom:20px;}
+.form-group.full{grid-column:1/-1;}
+.form-label{display:block;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.form-input,.form-textarea,.form-select{width:100%;background:rgba(11,15,26,0.6);border:1px solid var(--border);color:var(--cream);padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border 0.3s;resize:vertical;}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--gold);}
+.form-textarea{min-height:100px;line-height:1.6;}
+.form-select option{background:var(--navy-light);}
+.form-hint{font-size:0.72rem;color:var(--muted);margin-top:6px;}
+
+/* Cards in admin */
+.admin-card{background:var(--navy-light);border:1px solid var(--border);padding:24px;margin-bottom:16px;position:relative;}
+.admin-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.admin-card-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;}
+.admin-card-actions{display:flex;gap:8px;}
+.icon-btn{padding:7px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.icon-btn:hover{color:var(--cream);border-color:var(--cream);}
+.icon-btn.danger:hover{color:var(--red);border-color:var(--red);}
+.icon-btn.primary{color:var(--gold);border-color:var(--border);}
+.icon-btn.primary:hover{background:var(--gold-dim);border-color:var(--gold);}
+
+/* Bullet list editor */
+.bullet-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.bullet-item{display:flex;gap:8px;align-items:flex-start;}
+.bullet-item textarea{flex:1;background:rgba(11,15,26,0.6);border:1px solid var(--border);color:var(--cream);padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;transition:border 0.3s;resize:vertical;min-height:60px;line-height:1.5;}
+.bullet-item textarea:focus{border-color:var(--gold);}
+.remove-btn{padding:8px 10px;background:transparent;border:1px solid var(--border);color:var(--red);cursor:pointer;font-size:0.8rem;transition:all 0.2s;flex-shrink:0;}
+.remove-btn:hover{background:rgba(224,85,85,0.1);}
+.add-item-btn{padding:10px 20px;background:var(--gold-dim);border:1px solid var(--border);color:var(--gold);cursor:pointer;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;}
+.add-item-btn:hover{border-color:var(--gold);background:rgba(201,168,76,0.18);}
+
+/* Stats editor */
+.stats-grid-edit{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.stat-edit-card{background:rgba(11,15,26,0.5);border:1px solid var(--border);padding:16px;}
+.stat-num-big{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);margin-bottom:4px;}
+
+/* Toast */
+.toast{position:fixed;bottom:32px;right:32px;background:var(--navy-light);border:1px solid var(--green);color:var(--green);padding:14px 24px;font-size:0.82rem;letter-spacing:0.08em;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.error{border-color:var(--red);color:var(--red);}
+
+/* Collapsible sections */
+.section-divider{border:none;border-top:1px solid var(--border);margin:28px 0;}
+
+@media(max-width:900px){
+  nav{padding:20px 24px;}
+  nav.scrolled{padding:14px 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:100px 24px 60px;}
+  section{padding:70px 24px;}
+  .about-grid{grid-template-columns:1fr;gap:48px;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .awards-grid{grid-template-columns:1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
+  .admin-sidebar{width:220px;}
+  .admin-content{margin-left:220px;padding:24px;}
+  .form-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- ===================== PORTFOLIO VIEW ===================== -->
+<div id="portfolio-view">
+  <nav id="nav">
+    <a class="nav-logo" id="logo-click">M<span>.</span>Yeleti</a>
+    <ul class="nav-links">
+      <li><a onclick="scrollTo('about')">About</a></li>
+      <li><a onclick="scrollTo('experience')">Experience</a></li>
+      <li><a onclick="scrollTo('skills')">Skills</a></li>
+      <li><a onclick="scrollTo('education')">Education</a></li>
+      <li><a onclick="scrollTo('contact')">Contact</a></li>
+      <li><button class="nav-admin-btn" onclick="showAdminLogin()">⚙ Admin</button></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div class="hero-left">
+      <div class="hero-tag" id="p-hero-tag">Financial Reporting Specialist</div>
+      <h1 class="hero-name" id="p-hero-name"></h1>
+      <p class="hero-subtitle" id="p-hero-subtitle"></p>
+      <p class="hero-desc" id="p-hero-desc"></p>
+      <div class="hero-cta">
+        <a class="btn-primary" onclick="scrollTo('experience')">View Experience</a>
+        <a class="btn-outline" onclick="scrollTo('contact')">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-grid-art"></div>
+      <div class="hero-stats" id="p-hero-stats"></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label reveal">Profile</div>
+    <h2 class="section-title reveal">About <em>Manoj</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div id="p-about-paragraphs"></div>
+        <div class="about-highlights" id="p-about-highlights"></div>
+      </div>
+      <div class="reveal">
+        <div class="about-info" id="p-about-info"></div>
+        <div style="margin-top:32px;">
+          <div class="section-label" style="margin-bottom:16px;">Certifications</div>
+          <div class="cert-grid" id="p-certifications"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label reveal">Career</div>
+    <h2 class="section-title reveal">Work <em>Experience</em></h2>
+    <div class="timeline reveal" id="p-experience"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label reveal">Expertise</div>
+    <h2 class="section-title reveal">Core <em>Skills</em></h2>
+    <div class="skills-grid reveal" id="p-skills"></div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="section-label reveal">Recognition</div>
+    <h2 class="section-title reveal">Awards & <em>Honours</em></h2>
+    <div class="awards-grid reveal" id="p-awards"></div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label reveal">Academic Background</div>
+    <h2 class="section-title reveal"><em>Education</em></h2>
+    <div class="edu-grid reveal" id="p-education"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label reveal" style="justify-content:center;">Let's Connect</div>
+    <h2 class="section-title reveal" style="text-align:center;">Get In <em>Touch</em></h2>
+    <p class="contact-intro reveal" id="p-contact-intro"></p>
+    <div class="contact-cards reveal" id="p-contact-cards"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 <span id="p-footer-name"></span>. Financial Reporting Specialist.</p>
+    <p>Hyderabad, Telangana, India</p>
+  </footer>
+</div>
+
+<!-- ===================== ADMIN LOGIN ===================== -->
+<div id="admin-login-view">
+  <div class="login-box">
+    <div class="login-logo">M<span>.</span>Yeleti</div>
+    <div class="login-sub">Portfolio Admin Panel</div>
+    <label class="login-label">Password</label>
+    <input type="password" class="login-input" id="login-password" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Access Dashboard</button>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+    <span class="back-to-portfolio" onclick="showPortfolio()">← Back to Portfolio</span>
+  </div>
+</div>
+
+<!-- ===================== ADMIN DASHBOARD ===================== -->
+<div id="admin-dashboard-view">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <div class="admin-logo">M<span>.</span>Yeleti</div>
+      <div class="admin-badge">Admin Dashboard</div>
+    </div>
+    <nav class="admin-nav">
+      <div class="admin-nav-item active" onclick="showPanel('hero')" id="nav-hero"><span class="nav-icon">🏠</span>Hero Section</div>
+      <div class="admin-nav-item" onclick="showPanel('about')" id="nav-about"><span class="nav-icon">👤</span>About</div>
+      <div class="admin-nav-item" onclick="showPanel('experience')" id="nav-experience"><span class="nav-icon">💼</span>Experience</div>
+      <div class="admin-nav-item" onclick="showPanel('skills')" id="nav-skills"><span class="nav-icon">⚡</span>Skills</div>
+      <div class="admin-nav-item" onclick="showPanel('awards')" id="nav-awards"><span class="nav-icon">🏆</span>Awards</div>
+      <div class="admin-nav-item" onclick="showPanel('education')" id="nav-education"><span class="nav-icon">🎓</span>Education</div>
+      <div class="admin-nav-item" onclick="showPanel('contact')" id="nav-contact"><span class="nav-icon">📬</span>Contact</div>
+      <div class="admin-nav-item" onclick="showPanel('settings')" id="nav-settings"><span class="nav-icon">🔐</span>Settings</div>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <button class="sidebar-btn preview" onclick="showPortfolio()">👁 Preview Portfolio</button>
+      <button class="sidebar-btn logout" onclick="doLogout()">↩ Logout</button>
+    </div>
+  </aside>
+
+  <div class="admin-content">
+
+    <!-- HERO PANEL -->
+    <div class="admin-panel active" id="panel-hero">
+      <div class="admin-panel-title">Hero <em>Section</em></div>
+      <div class="admin-panel-sub">Edit your name, title, description, and stat cards shown on the homepage.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-hero"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveHero()">Save Hero</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" id="h-firstname" placeholder="Manoj">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" id="h-lastname" placeholder="kumar Yeleti">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Professional Title (Tag)</label>
+          <input type="text" class="form-input" id="h-tag" placeholder="Financial Reporting Specialist">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Subtitle</label>
+          <input type="text" class="form-input" id="h-subtitle" placeholder="4+ Years in Investment Banking...">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Hero Description</label>
+          <textarea class="form-textarea" id="h-desc" style="min-height:120px;"></textarea>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+      <div style="margin-bottom:16px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Stat Cards</div>
+      <div class="stats-grid-edit" id="stats-edit-grid"></div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="admin-panel" id="panel-about">
+      <div class="admin-panel-title">About <em>Section</em></div>
+      <div class="admin-panel-sub">Edit your bio paragraphs, highlights, contact info, and certifications.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-about"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveAbout()">Save About</button>
+      </div>
+
+      <div style="margin-bottom:12px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Bio Paragraphs</div>
+      <div class="bullet-list" id="about-paragraphs-list"></div>
+      <button class="add-item-btn" onclick="addParagraph()">+ Add Paragraph</button>
+
+      <hr class="section-divider">
+      <div style="margin-bottom:12px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Key Highlights</div>
+      <div id="about-highlights-list"></div>
+      <button class="add-item-btn" onclick="addHighlight()">+ Add Highlight</button>
+
+      <hr class="section-divider">
+      <div style="margin-bottom:16px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Contact Info</div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" id="a-location"></div>
+        <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-input" id="a-phone"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="a-email"></div>
+        <div class="form-group"><label class="form-label">LinkedIn URL</label><input type="text" class="form-input" id="a-linkedin"></div>
+        <div class="form-group"><label class="form-label">Languages</label><input type="text" class="form-input" id="a-languages"></div>
+        <div class="form-group"><label class="form-label">Nationality</label><input type="text" class="form-input" id="a-nationality"></div>
+      </div>
+
+      <hr class="section-divider">
+      <div style="margin-bottom:12px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Certifications</div>
+      <div class="bullet-list" id="about-certs-list"></div>
+      <button class="add-item-btn" onclick="addCert()">+ Add Certification</button>
+    </div>
+
+    <!-- EXPERIENCE PANEL -->
+    <div class="admin-panel" id="panel-experience">
+      <div class="admin-panel-title">Work <em>Experience</em></div>
+      <div class="admin-panel-sub">Add, edit, or remove job entries. Each entry supports bullet points and key achievements.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-experience"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveExperience()">Save Experience</button>
+      </div>
+      <div id="experience-list"></div>
+      <button class="add-item-btn" onclick="addExperience()" style="margin-top:8px;">+ Add Job Entry</button>
+    </div>
+
+    <!-- SKILLS PANEL -->
+    <div class="admin-panel" id="panel-skills">
+      <div class="admin-panel-title">Core <em>Skills</em></div>
+      <div class="admin-panel-sub">Manage skill groups and their tags. Separate tags with commas.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-skills"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveSkills()">Save Skills</button>
+      </div>
+      <div id="skills-list"></div>
+      <button class="add-item-btn" onclick="addSkillGroup()" style="margin-top:8px;">+ Add Skill Group</button>
+    </div>
+
+    <!-- AWARDS PANEL -->
+    <div class="admin-panel" id="panel-awards">
+      <div class="admin-panel-title">Awards & <em>Honours</em></div>
+      <div class="admin-panel-sub">Add or edit recognition and award entries.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-awards"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveAwards()">Save Awards</button>
+      </div>
+      <div id="awards-list"></div>
+      <button class="add-item-btn" onclick="addAward()" style="margin-top:8px;">+ Add Award</button>
+    </div>
+
+    <!-- EDUCATION PANEL -->
+    <div class="admin-panel" id="panel-education">
+      <div class="admin-panel-title">Academic <em>Education</em></div>
+      <div class="admin-panel-sub">Manage your educational qualifications.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-education"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveEducation()">Save Education</button>
+      </div>
+      <div id="education-list"></div>
+      <button class="add-item-btn" onclick="addEducation()" style="margin-top:8px;">+ Add Education</button>
+    </div>
+
+    <!-- CONTACT PANEL -->
+    <div class="admin-panel" id="panel-contact">
+      <div class="admin-panel-title">Contact <em>Section</em></div>
+      <div class="admin-panel-sub">Edit your contact cards shown at the bottom of the portfolio.</div>
+      <div class="panel-save-bar">
+        <div class="save-status" id="status-contact"><div class="dot"></div><span>Unsaved changes</span></div>
+        <button class="save-btn" onclick="saveContact()">Save Contact</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contact Intro Text</label>
+        <textarea class="form-textarea" id="c-intro"></textarea>
+      </div>
+      <hr class="section-divider">
+      <div style="margin-bottom:12px;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Contact Cards</div>
+      <div id="contact-cards-list"></div>
+      <button class="add-item-btn" onclick="addContactCard()">+ Add Contact Card</button>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="admin-panel" id="panel-settings">
+      <div class="admin-panel-title">Admin <em>Settings</em></div>
+      <div class="admin-panel-sub">Change your admin password.</div>
+      <div class="admin-card" style="max-width:460px;">
+        <div class="admin-card-header"><div class="admin-card-title">Change Password</div></div>
+        <div class="form-group">
+          <label class="form-label">Current Password</label>
+          <input type="password" class="form-input" id="s-current">
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <input type="password" class="form-input" id="s-new">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm New Password</label>
+          <input type="password" class="form-input" id="s-confirm">
+        </div>
+        <button class="save-btn" onclick="changePassword()">Update Password</button>
+      </div>
+      <div class="admin-card" style="max-width:460px;margin-top:16px;">
+        <div class="admin-card-header"><div class="admin-card-title">Data Management</div></div>
+        <p style="font-size:0.83rem;color:var(--muted);margin-bottom:20px;line-height:1.7;">Export your portfolio data as JSON for backup, or reset everything to the original defaults.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="icon-btn primary" onclick="exportData()">↓ Export Data (JSON)</button>
+          <button class="icon-btn danger" onclick="resetData()">↺ Reset to Defaults</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ============================
+   DEFAULT DATA
+   ============================ */
+const DEFAULTS = {
+  hero: {
+    firstname: "Manoj",
+    lastname: "kumar Yeleti",
+    tag: "Financial Reporting Specialist",
+    subtitle: "4+ Years in Investment Banking & Regulatory Compliance",
+    desc: "Delivering precision financial reporting across European regulatory frameworks — UK/US GAAP, IFRS, MiFID II, PRIIPs — for institutional clients including BlackRock, State Street, and UBS.",
+    stats: [
+      {num:"4+", label:"Years Experience"},
+      {num:"2K+", label:"Fund Reports"},
+      {num:"40%", label:"Process Efficiency Gain"},
+      {num:"100%", label:"Compliance Rate"}
+    ]
+  },
+  about: {
+    paragraphs: [
+      "A Financial Reporting Specialist with over four years of experience in investment banking, I specialize in regulatory compliance, fund reporting, and client management for European-domiciled investment funds.",
+      "Currently at Broadridge Financial Solutions, I oversee end-to-end financial reporting for institutional asset managers, ensuring alignment with CBI, ESMA, FCA, MiFID II, UCITS, PRIIPs, SFDR, and SFTR frameworks.",
+      "My expertise spans data analysis and process automation — leveraging tools like Excel, Power BI, Alteryx, and AI — to drive measurable improvements in accuracy and operational efficiency."
+    ],
+    highlights: [
+      {title:"Regulatory Compliance", text:"Managed compliance filings for BlackRock, State Street, and UBS across major EU regulatory frameworks."},
+      {title:"Process Optimization", text:"Automated financial reporting workflows, achieving a 40% reduction in processing time and 25% improvement in accuracy."},
+      {title:"Client Excellence", text:"Maintained 100% SLA compliance as primary point of contact for high-profile institutional clients."}
+    ],
+    info: {
+      location:"Hyderabad, Telangana, India",
+      phone:"+91 6303108005",
+      email:"manojyeleti.in@gmail.com",
+      linkedin:"https://www.linkedin.com/in/manojkumaryeleti/",
+      languages:"English, Telugu, French (A2)",
+      nationality:"Indian"
+    },
+    certifications: [
+      "KYC & Anti-Money Laundering (AML) Training",
+      "SEBI Investor Certification Examination (NISM)",
+      "Certification Program in Banking, Finance & Insurance (CPBFI)",
+      "Global Accounting, Finance & Global Markets — SSCPL, Hyderabad"
+    ]
+  },
+  experience: [
+    {
+      period:"Sep 2024 — Present",
+      role:"Senior Process Analyst",
+      company:"Broadridge Financial Solutions India Pvt. Ltd. — Hyderabad",
+      bullets:[
+        "Oversaw end-to-end financial reporting, regulatory reporting and compliance filings for asset management companies and investment funds (SICAV, RAIF, FCP) in alignment with European regulatory requirements.",
+        "Led production, review and validation of NAV calculations, reconciliations and fund financial statements, UCITS, PRIIPs for private equity funds, ensuring accuracy per fund accounting policies.",
+        "Coordinated quality control of financial reporting disclosures, EMT, EPT, SFDRs, SFTRs, mutual fund prospectus, and supplement documents in compliance with EU regulations (CBI, EMIR, CSSF, ESMA, FCA).",
+        "Implemented dual-review controls (4-Eye Principle), reducing errors and strengthening client trust in report reliability.",
+        "Performed data analysis to support fund reconciliations, monitored KPIs, and adhered to SOPs for process consistency."
+      ],
+      achievements:[
+        "Successfully managed timely submission of financial reports for large institutional clients — maintaining 100% compliance rate.",
+        "Played a key role in achieving error-free financial reporting and improving overall efficiency.",
+        "Delivered ad-hoc and client reports on time, maintaining SLA standards via JIRA Service Desk."
+      ]
+    },
+    {
+      period:"Jan 2022 — Sep 2024",
+      role:"Process Analyst – Financial Reporting Associate",
+      company:"Broadridge Financial Solutions India Pvt. Ltd. — Hyderabad",
+      bullets:[
+        "Prepared and reviewed financial reports for 2000+ European and Ireland-domiciled investment funds, complying with UK/US GAAP, IFRS, and Irish GAAP.",
+        "Produced monthly, quarterly, and annual fund reports including Fund Factsheets, MiFID II, PRIIPs, and UCITS KIID documentation.",
+        "Created 1000+ legal documents for regulatory filings including SFDRs, TCFDs, ESG, and SFTRs — meeting all deadlines with zero non-compliance penalties."
+      ],
+      achievements:[
+        "Streamlined the FCS process by identifying inefficiencies and implementing automation, achieving 40% reduction in processing time.",
+        "Achieved a 25% improvement in reporting accuracy through process enhancements.",
+        "Delivered timely, accurate reports for 2000+ funds, resulting in high client satisfaction."
+      ]
+    },
+    {
+      period:"Jan 2024 — Additional Activity",
+      role:"Investment Banking Job Simulation",
+      company:"JPMorgan Chase — Forage",
+      bullets:[
+        "Assessed strategic and financial criteria to identify a suitable M&A target for a client.",
+        "Developed a DCF model to evaluate the M&A target, incorporating adjustments for a competitor bid and supply chain disruptions.",
+        "Compiled a 2-page client brief highlighting the company profile and summarizing the auction process."
+      ],
+      achievements:[]
+    }
+  ],
+  skills: [
+    {icon:"📊", title:"Financial Reporting & Compliance", tags:["Financial Analysis","UK/US GAAP","IFRS","Irish GAAP","NAV Calculations","Reconciliations","UCITS KIID","PRIIPs","Investment Fund Statements","Fund Factsheets"]},
+    {icon:"🏛️", title:"Regulatory Knowledge", tags:["MiFID II","FCA","ESMA","EMIR","SFDR","SFTR","CBI","CSSF","ESG Reporting","KYC & AML"]},
+    {icon:"⚙️", title:"Data & Tools", tags:["Excel (Advanced)","Power BI","Alteryx","Financial Modelling","DCF Models","JIRA Service Desk","AI Tools (Copilot)","ChatGPT","Pivot Tables"]},
+    {icon:"🏦", title:"Fund Types", tags:["Mutual Funds","Hedge Funds","Private Equity","SICAV","RAIF","FCP","Investment Funds"]},
+    {icon:"🤝", title:"Client & Project Management", tags:["Client Communication","SLA Management","Cross-Functional Teams","Project Quotation","Invoicing","Process Management","Time Management"]},
+    {icon:"🌍", title:"Languages & Soft Skills", tags:["English","Telugu","French (A2)","Report Writing","Data Interpretation","Conflict Resolution"]}
+  ],
+  awards: [
+    {icon:"🏆", title:"Quarterly Performer Award", desc:"Honoured for consistent excellence in financial reporting and delivery standards across multiple reporting cycles."},
+    {icon:"⭐", title:"Client Appreciation", desc:"Formally acknowledged by high-profile institutional clients for prompt, accurate, and reliable financial report delivery."},
+    {icon:"🎖️", title:"Rewards & Recognition Award", desc:"Recognized internally for outstanding efficiency in report delivery and contribution to process improvement initiatives."}
+  ],
+  education: [
+    {year:"Aug 2021", degree:"Master of Business Administration", field:"Finance", institution:"Sasi Institute of Technology and Engineering"},
+    {year:"June 2019", degree:"Bachelor of Commerce", field:"Accounting & Commerce", institution:"Adikavi Nannaya University"}
+  ],
+  contact: {
+    intro:"Open to new opportunities in financial reporting, regulatory compliance, and investment fund management. Feel free to reach out.",
+    cards:[
+      {icon:"✉️", label:"Email", val:"manojyeleti.in@gmail.com", href:"mailto:manojyeleti.in@gmail.com"},
+      {icon:"📞", label:"Phone", val:"+91 6303108005", href:"tel:+916303108005"},
+      {icon:"💼", label:"LinkedIn", val:"manojkumaryeleti", href:"https://www.linkedin.com/in/manojkumaryeleti/"},
+      {icon:"📍", label:"Location", val:"Hyderabad, India", href:"#"}
+    ]
+  }
+};
+
+const ADMIN_PW_KEY = 'portfolio_admin_pw';
+const DATA_KEY = 'portfolio_data';
+const DEFAULT_PW = 'manoj@admin2025';
+
+/* ============================
+   DATA HELPERS
+   ============================ */
+function getData() {
+  try {
+    const raw = localStorage.getItem(DATA_KEY);
+    return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULTS));
+  } catch(e) { return JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+function saveData(data) {
+  localStorage.setItem(DATA_KEY, JSON.stringify(data));
+}
+function getPassword() {
+  return localStorage.getItem(ADMIN_PW_KEY) || DEFAULT_PW;
+}
+
+/* ============================
+   PORTFOLIO RENDERING
+   ============================ */
+function renderPortfolio() {
+  const d = getData();
+
+  // Hero
+  const h = d.hero;
+  document.getElementById('p-hero-tag').textContent = h.tag;
+  document.getElementById('p-hero-name').innerHTML = `${h.firstname}<br><span class="accent">${h.lastname}</span>`;
+  document.getElementById('p-hero-subtitle').textContent = h.subtitle;
+  document.getElementById('p-hero-desc').textContent = h.desc;
+  document.getElementById('p-hero-stats').innerHTML = h.stats.map(s =>
+    `<div class="stat-card"><div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div></div>`
+  ).join('');
+  document.getElementById('p-footer-name').textContent = `${h.firstname}${h.lastname}`;
+
+  // About
+  const a = d.about;
+  document.getElementById('p-about-paragraphs').innerHTML = a.paragraphs.map(p => `<p>${p}</p>`).join('');
+  document.getElementById('p-about-highlights').innerHTML = a.highlights.map(hl =>
+    `<div class="highlight-item"><div class="highlight-dot"></div><p><strong>${hl.title}:</strong> ${hl.text}</p></div>`
+  ).join('');
+  const info = a.info;
+  document.getElementById('p-about-info').innerHTML = `
+    <div class="info-row"><span class="info-key">Location</span><span class="info-val">${info.location}</span></div>
+    <div class="info-row"><span class="info-key">Contact</span><span class="info-val">${info.phone}</span></div>
+    <div class="info-row"><span class="info-key">Email</span><span class="info-val"><a href="mailto:${info.email}">${info.email}</a></span></div>
+    <div class="info-row"><span class="info-key">LinkedIn</span><span class="info-val"><a href="${info.linkedin}" target="_blank">manojkumaryeleti</a></span></div>
+    <div class="info-row"><span class="info-key">Languages</span><span class="info-val">${info.languages}</span></div>
+    <div class="info-row"><span class="info-key">Nationality</span><span class="info-val">${info.nationality}</span></div>
+  `;
+  document.getElementById('p-certifications').innerHTML = a.certifications.map(c =>
+    `<div class="cert-item">${c}</div>`
+  ).join('');
+
+  // Experience
+  document.getElementById('p-experience').innerHTML = d.experience.map(exp => `
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">${exp.period}</div>
+      <h3 class="timeline-role">${exp.role}</h3>
+      <p class="timeline-company">${exp.company}</p>
+      <ul class="timeline-list">${exp.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      ${exp.achievements && exp.achievements.length ? `
+      <div class="achievements-box">
+        <h4>Key Achievements</h4>
+        <ul>${exp.achievements.map(a => `<li>${a}</li>`).join('')}</ul>
+      </div>` : ''}
+    </div>
+  `).join('');
+
+  // Skills
+  document.getElementById('p-skills').innerHTML = d.skills.map(sg => `
+    <div class="skill-group">
+      <div class="skill-group-icon">${sg.icon}</div>
+      <h3 class="skill-group-title">${sg.title}</h3>
+      <div class="skill-tags">${sg.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  // Awards
+  document.getElementById('p-awards').innerHTML = d.awards.map((aw, i) => `
+    <div class="award-card">
+      <div class="award-num">0${i+1}</div>
+      <div class="award-icon">${aw.icon}</div>
+      <h3 class="award-title">${aw.title}</h3>
+      <p class="award-desc">${aw.desc}</p>
+    </div>
+  `).join('');
+
+  // Education
+  document.getElementById('p-education').innerHTML = d.education.map(ed => `
+    <div class="edu-card">
+      <div class="edu-year">${ed.year}</div>
+      <h3 class="edu-degree">${ed.degree}</h3>
+      <p class="edu-field">${ed.field}</p>
+      <p class="edu-inst">${ed.institution}</p>
+    </div>
+  `).join('');
+
+  // Contact
+  const c = d.contact;
+  document.getElementById('p-contact-intro').textContent = c.intro;
+  document.getElementById('p-contact-cards').innerHTML = c.cards.map(cc => `
+    <a href="${cc.href}" class="contact-card" ${cc.href !== '#' ? 'target="_blank"' : ''}>
+      <div class="contact-card-icon">${cc.icon}</div>
+      <div class="contact-card-label">${cc.label}</div>
+      <div class="contact-card-val">${cc.val}</div>
+    </a>
+  `).join('');
+
+  // Reveal
+  setupReveal();
+}
+
+function setupReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.1});
+  reveals.forEach(el => { el.classList.remove('visible'); io.observe(el); });
+}
+
+/* ============================
+   NAVIGATION
+   ============================ */
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+function showPortfolio() {
+  document.getElementById('portfolio-view').style.display = 'block';
+  document.getElementById('admin-login-view').style.display = 'none';
+  document.getElementById('admin-dashboard-view').style.display = 'none';
+  renderPortfolio();
+  window.scrollTo(0,0);
+}
+function showAdminLogin() {
+  document.getElementById('portfolio-view').style.display = 'none';
+  document.getElementById('admin-login-view').style.display = 'flex';
+  document.getElementById('admin-dashboard-view').style.display = 'none';
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  setTimeout(() => document.getElementById('login-password').focus(), 100);
+}
+function showAdminDashboard() {
+  document.getElementById('portfolio-view').style.display = 'none';
+  document.getElementById('admin-login-view').style.display = 'none';
+  document.getElementById('admin-dashboard-view').style.display = 'flex';
+  loadAllAdminForms();
+  showPanel('hero');
+}
+
+// Secret logo click (5 times) → admin
+let logoClicks = 0, logoTimer;
+document.getElementById('logo-click').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks = 0, 2000);
+  if (logoClicks >= 5) { logoClicks = 0; showAdminLogin(); }
+});
+
+/* ============================
+   AUTH
+   ============================ */
+let isLoggedIn = false;
+function doLogin() {
+  const pw = document.getElementById('login-password').value;
+  if (pw === getPassword()) {
+    isLoggedIn = true;
+    showAdminDashboard();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function doLogout() {
+  isLoggedIn = false;
+  showPortfolio();
+}
+
+/* ============================
+   ADMIN PANEL SWITCHING
+   ============================ */
+function showPanel(name) {
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-'+name)?.classList.add('active');
+  document.getElementById('nav-'+name)?.classList.add('active');
+}
+
+/* ============================
+   ADMIN FORMS — LOAD
+   ============================ */
+function loadAllAdminForms() {
+  const d = getData();
+  loadHeroForm(d.hero);
+  loadAboutForm(d.about);
+  loadExperienceForm(d.experience);
+  loadSkillsForm(d.skills);
+  loadAwardsForm(d.awards);
+  loadEducationForm(d.education);
+  loadContactForm(d.contact);
+}
+
+/* HERO FORM */
+function loadHeroForm(h) {
+  document.getElementById('h-firstname').value = h.firstname;
+  document.getElementById('h-lastname').value = h.lastname;
+  document.getElementById('h-tag').value = h.tag;
+  document.getElementById('h-subtitle').value = h.subtitle;
+  document.getElementById('h-desc').value = h.desc;
+  document.getElementById('stats-edit-grid').innerHTML = h.stats.map((s, i) => `
+    <div class="stat-edit-card">
+      <div class="stat-num-big">Stat ${i+1}</div>
+      <div class="form-group" style="margin-bottom:8px;">
+        <label class="form-label">Number / Value</label>
+        <input type="text" class="form-input" id="stat-num-${i}" value="${s.num}" placeholder="e.g. 4+">
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label">Label</label>
+        <input type="text" class="form-input" id="stat-label-${i}" value="${s.label}" placeholder="e.g. Years Experience">
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ABOUT FORM */
+function loadAboutForm(a) {
+  renderParagraphList(a.paragraphs);
+  renderHighlightList(a.highlights);
+  const info = a.info;
+  document.getElementById('a-location').value = info.location;
+  document.getElementById('a-phone').value = info.phone;
+  document.getElementById('a-email').value = info.email;
+  document.getElementById('a-linkedin').value = info.linkedin;
+  document.getElementById('a-languages').value = info.languages;
+  document.getElementById('a-nationality').value = info.nationality;
+  renderCertList(a.certifications);
+}
+
+function renderParagraphList(paras) {
+  document.getElementById('about-paragraphs-list').innerHTML = paras.map((p, i) => `
+    <div class="bullet-item">
+      <textarea onchange="updateParagraph(${i},this.value)">${p}</textarea>
+      <button class="remove-btn" onclick="removeParagraph(${i})">✕</button>
+    </div>
+  `).join('');
+}
+function renderHighlightList(highlights) {
+  document.getElementById('about-highlights-list').innerHTML = highlights.map((hl, i) => `
+    <div class="admin-card" style="margin-bottom:12px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">Highlight ${i+1}</div>
+        <button class="icon-btn danger" onclick="removeHighlight(${i})">✕ Remove</button>
+      </div>
+      <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="hl-title-${i}" value="${hl.title}"></div>
+      <div class="form-group" style="margin-bottom:0;"><label class="form-label">Description</label><textarea class="form-textarea" id="hl-text-${i}" style="min-height:70px;">${hl.text}</textarea></div>
+    </div>
+  `).join('');
+}
+function renderCertList(certs) {
+  document.getElementById('about-certs-list').innerHTML = certs.map((c, i) => `
+    <div class="bullet-item">
+      <textarea style="min-height:44px;" onchange="updateCert(${i},this.value)">${c}</textarea>
+      <button class="remove-btn" onclick="removeCert(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+let _paragraphs, _highlights, _certs;
+function initAboutBuffers() {
+  if (!_paragraphs) { const d = getData(); _paragraphs=[...d.about.paragraphs]; _highlights=[...d.about.highlights]; _certs=[...d.about.certifications]; }
+}
+function updateParagraph(i,v){initAboutBuffers();_paragraphs[i]=v;}
+function removeParagraph(i){initAboutBuffers();_paragraphs.splice(i,1);renderParagraphList(_paragraphs);}
+function addParagraph(){initAboutBuffers();_paragraphs.push('New paragraph...');renderParagraphList(_paragraphs);}
+function updateCert(i,v){initAboutBuffers();_certs[i]=v;}
+function removeCert(i){initAboutBuffers();_certs.splice(i,1);renderCertList(_certs);}
+function addCert(){initAboutBuffers();_certs.push('New certification');renderCertList(_certs);}
+function removeHighlight(i){initAboutBuffers();_highlights.splice(i,1);renderHighlightList(_highlights);}
+function addHighlight(){initAboutBuffers();_highlights.push({title:'New Highlight',text:'Description here.'});renderHighlightList(_highlights);}
+
+/* EXPERIENCE FORM */
+function loadExperienceForm(exp) {
+  renderExperienceList(exp);
+}
+function renderExperienceList(exp) {
+  document.getElementById('experience-list').innerHTML = exp.map((e, i) => `
+    <div class="admin-card" style="margin-bottom:16px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">${e.role || 'Job Entry '+(i+1)}</div>
+        <div class="admin-card-actions">
+          <button class="icon-btn danger" onclick="removeExp(${i})">✕ Remove</button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Period</label><input type="text" class="form-input" id="exp-period-${i}" value="${e.period}"></div>
+        <div class="form-group"><label class="form-label">Role / Job Title</label><input type="text" class="form-input" id="exp-role-${i}" value="${e.role}"></div>
+        <div class="form-group full"><label class="form-label">Company & Location</label><input type="text" class="form-input" id="exp-company-${i}" value="${e.company}"></div>
+      </div>
+      <div style="margin-bottom:8px;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Responsibilities</div>
+      <div class="bullet-list" id="exp-bullets-${i}">${e.bullets.map((b,bi)=>`
+        <div class="bullet-item"><textarea>${b}</textarea><button class="remove-btn" onclick="removeExpBullet(${i},${bi})">✕</button></div>
+      `).join('')}</div>
+      <button class="add-item-btn" onclick="addExpBullet(${i})" style="margin-bottom:20px;">+ Add Bullet</button>
+      <div style="margin-bottom:8px;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Key Achievements (optional)</div>
+      <div class="bullet-list" id="exp-achievements-${i}">${(e.achievements||[]).map((a,ai)=>`
+        <div class="bullet-item"><textarea>${a}</textarea><button class="remove-btn" onclick="removeExpAch(${i},${ai})">✕</button></div>
+      `).join('')}</div>
+      <button class="add-item-btn" onclick="addExpAch(${i})">+ Add Achievement</button>
+    </div>
+  `).join('');
+}
+
+let _experience;
+function initExpBuffer(){if(!_experience){_experience=JSON.parse(JSON.stringify(getData().experience));}}
+function removeExp(i){initExpBuffer();_experience.splice(i,1);renderExperienceList(_experience);}
+function addExperience(){initExpBuffer();_experience.unshift({period:'',role:'',company:'',bullets:[''],achievements:[]});renderExperienceList(_experience);}
+function removeExpBullet(ei,bi){initExpBuffer();const bullets=[...document.querySelectorAll(`#exp-bullets-${ei} textarea`)].map(t=>t.value);bullets.splice(bi,1);_experience[ei].bullets=bullets;renderExperienceList(_experience);}
+function addExpBullet(ei){initExpBuffer();const bullets=[...document.querySelectorAll(`#exp-bullets-${ei} textarea`)].map(t=>t.value);bullets.push('');_experience[ei].bullets=bullets;renderExperienceList(_experience);}
+function removeExpAch(ei,ai){initExpBuffer();const achs=[...document.querySelectorAll(`#exp-achievements-${ei} textarea`)].map(t=>t.value);achs.splice(ai,1);_experience[ei].achievements=achs;renderExperienceList(_experience);}
+function addExpAch(ei){initExpBuffer();const achs=[...document.querySelectorAll(`#exp-achievements-${ei} textarea`)].map(t=>t.value);achs.push('');_experience[ei].achievements=achs;renderExperienceList(_experience);}
+
+/* SKILLS FORM */
+function loadSkillsForm(skills) {
+  renderSkillsList(skills);
+}
+function renderSkillsList(skills) {
+  document.getElementById('skills-list').innerHTML = skills.map((sg, i) => `
+    <div class="admin-card" style="margin-bottom:12px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">${sg.title}</div>
+        <button class="icon-btn danger" onclick="removeSkillGroup(${i})">✕ Remove</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Icon (emoji)</label><input type="text" class="form-input" id="sg-icon-${i}" value="${sg.icon}" style="font-size:1.2rem;"></div>
+        <div class="form-group"><label class="form-label">Group Title</label><input type="text" class="form-input" id="sg-title-${i}" value="${sg.title}"></div>
+        <div class="form-group full"><label class="form-label">Tags (comma-separated)</label><input type="text" class="form-input" id="sg-tags-${i}" value="${sg.tags.join(', ')}"><div class="form-hint">Separate each skill tag with a comma. E.g. Excel, Power BI, Alteryx</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+let _skills;
+function initSkillsBuffer(){if(!_skills){_skills=JSON.parse(JSON.stringify(getData().skills));}}
+function removeSkillGroup(i){initSkillsBuffer();_skills.splice(i,1);renderSkillsList(_skills);}
+function addSkillGroup(){initSkillsBuffer();_skills.push({icon:'⭐',title:'New Skill Group',tags:['Skill 1','Skill 2']});renderSkillsList(_skills);}
+
+/* AWARDS FORM */
+function loadAwardsForm(awards) {
+  renderAwardsList(awards);
+}
+function renderAwardsList(awards) {
+  document.getElementById('awards-list').innerHTML = awards.map((aw, i) => `
+    <div class="admin-card" style="margin-bottom:12px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">${aw.title}</div>
+        <button class="icon-btn danger" onclick="removeAward(${i})">✕ Remove</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Icon (emoji)</label><input type="text" class="form-input" id="aw-icon-${i}" value="${aw.icon}"></div>
+        <div class="form-group"><label class="form-label">Award Title</label><input type="text" class="form-input" id="aw-title-${i}" value="${aw.title}"></div>
+        <div class="form-group full"><label class="form-label">Description</label><textarea class="form-textarea" id="aw-desc-${i}" style="min-height:70px;">${aw.desc}</textarea></div>
+      </div>
+    </div>
+  `).join('');
+}
+let _awards;
+function initAwardsBuffer(){if(!_awards){_awards=JSON.parse(JSON.stringify(getData().awards));}}
+function removeAward(i){initAwardsBuffer();_awards.splice(i,1);renderAwardsList(_awards);}
+function addAward(){initAwardsBuffer();_awards.push({icon:'🏅',title:'New Award',desc:'Description of this award.'});renderAwardsList(_awards);}
+
+/* EDUCATION FORM */
+function loadEducationForm(edu) {
+  renderEducationList(edu);
+}
+function renderEducationList(edu) {
+  document.getElementById('education-list').innerHTML = edu.map((ed, i) => `
+    <div class="admin-card" style="margin-bottom:12px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">${ed.degree}</div>
+        <button class="icon-btn danger" onclick="removeEducation(${i})">✕ Remove</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Year / Period</label><input type="text" class="form-input" id="ed-year-${i}" value="${ed.year}"></div>
+        <div class="form-group"><label class="form-label">Degree Name</label><input type="text" class="form-input" id="ed-degree-${i}" value="${ed.degree}"></div>
+        <div class="form-group"><label class="form-label">Field of Study</label><input type="text" class="form-input" id="ed-field-${i}" value="${ed.field}"></div>
+        <div class="form-group"><label class="form-label">Institution</label><input type="text" class="form-input" id="ed-inst-${i}" value="${ed.institution}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+let _education;
+function initEduBuffer(){if(!_education){_education=JSON.parse(JSON.stringify(getData().education));}}
+function removeEducation(i){initEduBuffer();_education.splice(i,1);renderEducationList(_education);}
+function addEducation(){initEduBuffer();_education.push({year:'',degree:'',field:'',institution:''});renderEducationList(_education);}
+
+/* CONTACT FORM */
+function loadContactForm(c) {
+  document.getElementById('c-intro').value = c.intro;
+  renderContactCardsList(c.cards);
+}
+function renderContactCardsList(cards) {
+  document.getElementById('contact-cards-list').innerHTML = cards.map((cc, i) => `
+    <div class="admin-card" style="margin-bottom:12px;">
+      <div class="admin-card-header">
+        <div class="admin-card-title">${cc.label} Card</div>
+        <button class="icon-btn danger" onclick="removeContactCard(${i})">✕ Remove</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Icon (emoji)</label><input type="text" class="form-input" id="cc-icon-${i}" value="${cc.icon}"></div>
+        <div class="form-group"><label class="form-label">Label</label><input type="text" class="form-input" id="cc-label-${i}" value="${cc.label}"></div>
+        <div class="form-group"><label class="form-label">Display Value</label><input type="text" class="form-input" id="cc-val-${i}" value="${cc.val}"></div>
+        <div class="form-group"><label class="form-label">Link (href)</label><input type="text" class="form-input" id="cc-href-${i}" value="${cc.href}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+let _contactCards;
+function initContactBuffer(){if(!_contactCards){_contactCards=JSON.parse(JSON.stringify(getData().contact.cards));}}
+function removeContactCard(i){initContactBuffer();_contactCards.splice(i,1);renderContactCardsList(_contactCards);}
+function addContactCard(){initContactBuffer();_contactCards.push({icon:'🔗',label:'New Link',val:'',href:'#'});renderContactCardsList(_contactCards);}
+
+/* ============================
+   SAVE FUNCTIONS
+   ============================ */
+function setSaved(section) {
+  const el = document.getElementById('status-'+section);
+  if(el){el.classList.add('saved');el.querySelector('span').textContent='Saved!';}
+  setTimeout(()=>{if(el){el.classList.remove('saved');el.querySelector('span').textContent='Unsaved changes';}}, 2500);
+}
+
+function saveHero() {
+  const d = getData();
+  const statCount = d.hero.stats.length;
+  d.hero = {
+    firstname: document.getElementById('h-firstname').value,
+    lastname: document.getElementById('h-lastname').value,
+    tag: document.getElementById('h-tag').value,
+    subtitle: document.getElementById('h-subtitle').value,
+    desc: document.getElementById('h-desc').value,
+    stats: Array.from({length:statCount},(_,i)=>({
+      num: document.getElementById(`stat-num-${i}`)?.value || '',
+      label: document.getElementById(`stat-label-${i}`)?.value || ''
+    }))
+  };
+  saveData(d); setSaved('hero'); showToast('Hero section saved!');
+}
+
+function saveAbout() {
+  initAboutBuffers();
+  // Read current textarea values
+  document.querySelectorAll('#about-paragraphs-list textarea').forEach((ta,i)=>{_paragraphs[i]=ta.value;});
+  document.querySelectorAll('#about-certs-list textarea').forEach((ta,i)=>{_certs[i]=ta.value;});
+  const hlCount = document.querySelectorAll('#about-highlights-list .admin-card').length;
+  const highlights = Array.from({length:hlCount},(_,i)=>({
+    title: document.getElementById(`hl-title-${i}`)?.value||'',
+    text: document.getElementById(`hl-text-${i}`)?.value||''
+  }));
+  const d = getData();
+  d.about = {
+    paragraphs: [..._paragraphs],
+    highlights,
+    info:{
+      location: document.getElementById('a-location').value,
+      phone: document.getElementById('a-phone').value,
+      email: document.getElementById('a-email').value,
+      linkedin: document.getElementById('a-linkedin').value,
+      languages: document.getElementById('a-languages').value,
+      nationality: document.getElementById('a-nationality').value
+    },
+    certifications: [..._certs]
+  };
+  saveData(d); setSaved('about'); showToast('About section saved!');
+  _paragraphs=null; _highlights=null; _certs=null;
+}
+
+function saveExperience() {
+  initExpBuffer();
+  const count = document.querySelectorAll('#experience-list .admin-card').length;
+  const exp = Array.from({length:count},(_,i)=>{
+    const bullets=[...document.querySelectorAll(`#exp-bullets-${i} textarea`)].map(t=>t.value).filter(v=>v.trim());
+    const achievements=[...document.querySelectorAll(`#exp-achievements-${i} textarea`)].map(t=>t.value).filter(v=>v.trim());
+    return {
+      period:document.getElementById(`exp-period-${i}`)?.value||'',
+      role:document.getElementById(`exp-role-${i}`)?.value||'',
+      company:document.getElementById(`exp-company-${i}`)?.value||'',
+      bullets, achievements
+    };
+  });
+  const d=getData(); d.experience=exp;
+  saveData(d); setSaved('experience'); showToast('Experience saved!');
+  _experience=null;
+}
+
+function saveSkills() {
+  initSkillsBuffer();
+  const count=document.querySelectorAll('#skills-list .admin-card').length;
+  const skills=Array.from({length:count},(_,i)=>({
+    icon:document.getElementById(`sg-icon-${i}`)?.value||'⭐',
+    title:document.getElementById(`sg-title-${i}`)?.value||'',
+    tags:(document.getElementById(`sg-tags-${i}`)?.value||'').split(',').map(t=>t.trim()).filter(Boolean)
+  }));
+  const d=getData(); d.skills=skills;
+  saveData(d); setSaved('skills'); showToast('Skills saved!');
+  _skills=null;
+}
+
+function saveAwards() {
+  initAwardsBuffer();
+  const count=document.querySelectorAll('#awards-list .admin-card').length;
+  const awards=Array.from({length:count},(_,i)=>({
+    icon:document.getElementById(`aw-icon-${i}`)?.value||'🏅',
+    title:document.getElementById(`aw-title-${i}`)?.value||'',
+    desc:document.getElementById(`aw-desc-${i}`)?.value||''
+  }));
+  const d=getData(); d.awards=awards;
+  saveData(d); setSaved('awards'); showToast('Awards saved!');
+  _awards=null;
+}
+
+function saveEducation() {
+  initEduBuffer();
+  const count=document.querySelectorAll('#education-list .admin-card').length;
+  const education=Array.from({length:count},(_,i)=>({
+    year:document.getElementById(`ed-year-${i}`)?.value||'',
+    degree:document.getElementById(`ed-degree-${i}`)?.value||'',
+    field:document.getElementById(`ed-field-${i}`)?.value||'',
+    institution:document.getElementById(`ed-inst-${i}`)?.value||''
+  }));
+  const d=getData(); d.education=education;
+  saveData(d); setSaved('education'); showToast('Education saved!');
+  _education=null;
+}
+
+function saveContact() {
+  initContactBuffer();
+  const count=document.querySelectorAll('#contact-cards-list .admin-card').length;
+  const cards=Array.from({length:count},(_,i)=>({
+    icon:document.getElementById(`cc-icon-${i}`)?.value||'🔗',
+    label:document.getElementById(`cc-label-${i}`)?.value||'',
+    val:document.getElementById(`cc-val-${i}`)?.value||'',
+    href:document.getElementById(`cc-href-${i}`)?.value||'#'
+  }));
+  const d=getData();
+  d.contact={intro:document.getElementById('c-intro').value, cards};
+  saveData(d); setSaved('contact'); showToast('Contact saved!');
+  _contactCards=null;
+}
+
+/* ============================
+   SETTINGS
+   ============================ */
+function changePassword() {
+  const cur=document.getElementById('s-current').value;
+  const nw=document.getElementById('s-new').value;
+  const conf=document.getElementById('s-confirm').value;
+  if(cur!==getPassword()){showToast('Current password is incorrect','error');return;}
+  if(nw.length<6){showToast('New password must be at least 6 characters','error');return;}
+  if(nw!==conf){showToast('New passwords do not match','error');return;}
+  localStorage.setItem(ADMIN_PW_KEY,nw);
+  document.getElementById('s-current').value='';
+  document.getElementById('s-new').value='';
+  document.getElementById('s-confirm').value='';
+  showToast('Password updated successfully!');
+}
+
+function exportData() {
+  const d=getData();
+  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='portfolio-data.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported as JSON!');
+}
+
+function resetData() {
+  if(confirm('⚠️ This will reset ALL portfolio content to defaults. This cannot be undone. Continue?')) {
+    localStorage.removeItem(DATA_KEY);
+    _paragraphs=null; _highlights=null; _certs=null;
+    _experience=null; _skills=null; _awards=null; _education=null; _contactCards=null;
+    loadAllAdminForms();
+    showToast('Portfolio reset to defaults!');
+  }
+}
+
+/* ============================
+   TOAST
+   ============================ */
+function showToast(msg, type='success') {
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast'+(type==='error'?' error':'');
+  setTimeout(()=>t.classList.add('show'),10);
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+/* ============================
+   INIT
+   ============================ */
+renderPortfolio();
+</script>
+</body>
+</html>
